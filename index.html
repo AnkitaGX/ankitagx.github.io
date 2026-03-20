@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ankita Ghosh</title>
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --bg-soft: #121923;
+      --panel: #161f2b;
+      --text: #e7edf5;
+      --muted: #9fb0c3;
+      --line: #243244;
+      --accent: #9cc6ff;
+      --accent-soft: #1b3352;
+      --maxw: 980px;
+      --radius: 18px;
+      --shadow: 0 10px 30px rgba(0,0,0,0.22);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, var(--bg) 0%, #0f141c 100%);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover { text-decoration: underline; }
+
+    .container {
+      width: min(var(--maxw), calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(10px);
+      background: rgba(11, 15, 20, 0.82);
+      border-bottom: 1px solid rgba(36, 50, 68, 0.8);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+      gap: 1rem;
+    }
+
+    .brand {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
+      color: var(--text);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover { color: var(--text); text-decoration: none; }
+
+    .hero {
+      padding: 5rem 0 3rem;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .hero-card, .panel {
+      background: rgba(18, 25, 35, 0.72);
+      border: 1px solid rgba(36, 50, 68, 0.95);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      padding: 2rem;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.84rem;
+      margin-bottom: 1rem;
+    }
+
+    h1, h2, h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.2;
+      margin: 0 0 0.8rem;
+      letter-spacing: 0.01em;
+    }
+
+    h1 { font-size: clamp(2.3rem, 5vw, 4rem); }
+    h2 { font-size: clamp(1.5rem, 3vw, 2.15rem); }
+    h3 { font-size: 1.1rem; }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 60ch;
+      margin-bottom: 1.25rem;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 1.25rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.82rem 1.1rem;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      color: var(--text);
+      background: #111826;
+      transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+
+    .btn:hover {
+      text-decoration: none;
+      transform: translateY(-1px);
+      border-color: var(--accent);
+    }
+
+    .btn.primary {
+      background: var(--accent);
+      color: #08111d;
+      border-color: var(--accent);
+      font-weight: 600;
+    }
+
+    .profile-panel {
+      padding: 1.4rem;
+    }
+
+    .profile-photo {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #22324a, #101722);
+      border: 1px solid var(--line);
+      display: block;
+    }
+
+    .profile-meta {
+      margin-top: 1rem;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    section {
+      padding: 1.25rem 0 0;
+      margin-bottom: 2rem;
+    }
+
+    .section-head {
+      margin-bottom: 1rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 1rem;
+    }
+
+    .col-8 { grid-column: span 8; }
+    .col-4 { grid-column: span 4; }
+    .col-12 { grid-column: span 12; }
+
+    .panel {
+      padding: 1.35rem;
+    }
+
+    .muted { color: var(--muted); }
+
+    .research-list {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .item {
+      padding: 1rem 1.05rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(13, 19, 28, 0.75);
+    }
+
+    .item-title {
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+
+    .tag-row {
+      display: flex;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+      margin-top: 0.65rem;
+    }
+
+    .tag {
+      font-size: 0.78rem;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.22rem 0.55rem;
+    }
+
+    .two-col-list {
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .two-col-list p {
+      margin: 0;
+    }
+
+    footer {
+      padding: 2rem 0 3rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 860px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 3rem;
+      }
+      .col-8, .col-4 { grid-column: span 12; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <div class="brand">Ankita Ghosh</div>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#research">Research</a>
+        <a href="#papers">Papers</a>
+        <a href="#cv">CV</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-card">
+        <div class="eyebrow">PhD Student in Econometrics</div>
+        <h1>Ankita Ghosh</h1>
+        <p class="subtitle">
+          I am a PhD student in Econometrics at the Barcelona School of Economics and Universitat Pompeu Fabra. My research interests lie in econometric theory, time series econometrics, inference under dependence, and macroeconometric methods with external instruments.
+        </p>
+        <p class="muted">
+          Advisors: Christian Brownlees and Gábor Lugosi
+        </p>
+        <div class="button-row">
+          <a class="btn primary" href="#research">View research</a>
+          <a class="btn" href="#cv">Download CV</a>
+          <a class="btn" href="https://github.com/ankitaghosh" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </div>
+      </div>
+
+      <aside class="panel profile-panel">
+        <img class="profile-photo" src="assets/img/profile.jpg" alt="Profile photo placeholder" />
+        <div class="profile-meta">
+          <strong>Affiliation</strong><br />
+          Barcelona School of Economics / UPF<br /><br />
+          <strong>Fields</strong><br />
+          Econometric Theory, Time Series, Macroeconometrics<br /><br />
+          <strong>Location</strong><br />
+          Barcelona / Rome
+        </div>
+      </aside>
+    </section>
+
+    <section id="about">
+      <div class="grid">
+        <div class="col-8 panel">
+          <div class="section-head">
+            <h2>About</h2>
+          </div>
+          <p>
+            My work focuses on statistical and econometric methods for dependent data, dynamic causal inference, and identification with imperfect or external instruments. I am particularly interested in settings where standard asymptotic tools become fragile and where theory can guide more reliable inference.
+          </p>
+          <p>
+            This website is a simple record of current work, drafts, and ongoing projects. It will grow as the papers do, which is a very academic way of saying it is alive and slightly unfinished.
+          </p>
+        </div>
+
+        <div class="col-4 panel">
+          <div class="section-head">
+            <h2>News</h2>
+          </div>
+          <div class="two-col-list">
+            <p><strong>2026</strong><br /><span class="muted">Add conference presentations, visits, or recent drafts here.</span></p>
+            <p><strong>Working paper</strong><br /><span class="muted">Replace this with your arXiv paper title and link.</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="research">
+      <div class="panel">
+        <div class="section-head">
+          <h2>Research Interests</h2>
+          <p class="muted">A few current corners of the map.</p>
+        </div>
+        <div class="research-list">
+          <div class="item">
+            <div class="item-title">Inference under dependence</div>
+            <div class="muted">Confidence sequences, time-uniform inference, and asymptotic tools for dependent processes, including mixing settings.</div>
+            <div class="tag-row">
+              <span class="tag">Confidence sequences</span>
+              <span class="tag">α-mixing</span>
+              <span class="tag">Econometric theory</span>
+            </div>
+          </div>
+          <div class="item">
+            <div class="item-title">Local projections with external instruments</div>
+            <div class="muted">Dynamic causal estimation, identification, and simulation-based evaluation for LP-IV procedures in macroeconometrics.</div>
+            <div class="tag-row">
+              <span class="tag">LP-IV</span>
+              <span class="tag">External instruments</span>
+              <span class="tag">Macroeconometrics</span>
+            </div>
+          </div>
+          <div class="item">
+            <div class="item-title">Threshold models and regime switching</div>
+            <div class="muted">Threshold VAR and related nonlinear models with proxy instruments, with attention to identification and estimation.</div>
+            <div class="tag-row">
+              <span class="tag">Threshold VAR</span>
+              <span class="tag">Proxy SVAR</span>
+              <span class="tag">Nonlinear dynamics</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="papers">
+      <div class="panel">
+        <div class="section-head">
+          <h2>Papers & Work in Progress</h2>
+        </div>
+        <div class="research-list">
+          <div class="item">
+            <div class="item-title">[ArXiv paper title here]</div>
+            <div class="muted">With Christian Brownlees and Chiara. Add a one- or two-line description here, plus links to the paper, abstract, or code.</div>
+          </div>
+          <div class="item">
+            <div class="item-title">Time-uniform inference under dependence</div>
+            <div class="muted">Work in progress on confidence sequences and sequential inference for dependent data.</div>
+          </div>
+          <div class="item">
+            <div class="item-title">LP-IV simulations and identification</div>
+            <div class="muted">Work in progress on dynamic causal estimation with external instruments and finite-sample evaluation.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cv">
+      <div class="panel">
+        <div class="section-head">
+          <h2>CV</h2>
+        </div>
+        <p>
+          Upload your CV PDF to the repository and link it here. For example: <a href="assets/pdf/Ankita_Ghosh_CV.pdf" target="_blank" rel="noopener noreferrer">Download CV</a>
+        </p>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="panel">
+        <div class="section-head">
+          <h2>Contact</h2>
+        </div>
+        <p>
+          Email: <a href="mailto:your.email@upf.edu">your.email@upf.edu</a><br />
+          GitHub: <a href="https://github.com/ankitaghosh" target="_blank" rel="noopener noreferrer">github.com/ankitaghosh</a><br />
+          LinkedIn: <a href="#">Add your LinkedIn here</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+    <div>© <span id="year"></span> Ankita Ghosh</div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
